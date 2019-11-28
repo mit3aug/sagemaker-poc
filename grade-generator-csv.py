@@ -8,7 +8,7 @@ import random
 import statistics
 
 
-numberOfStudentsData = 100
+numberOfStudentsData = 1000
 data_partition_names = ['train', 'verify', 'test']
 noiselevel = 5
 
