@@ -1,8 +1,14 @@
-j=1
-m=5
-print(1 % 5)
-print(3 % 5)
-print( 5 % 5)
-print(11 % 5)
-print(31 % 5)
-print( 55 % 5)
+import json
+
+data_partition_names = ['train', 'verify', 'test']
+messages = {}
+x = 1
+for d in data_partition_names:
+
+    messages[d] = "This is Test {}".format(x)
+    x = x + 1
+
+
+print(json.dumps(messages))
+
+

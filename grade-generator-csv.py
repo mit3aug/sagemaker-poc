@@ -12,6 +12,11 @@ numberOfStudentsData = 1000
 data_partition_names = ['train', 'verify', 'test']
 noiselevel = 5
 
+region='us-east-1'
+
+bucket='mitesh-sagemaker-11142019' # Replace with your s3 bucket name
+prefix = 'sagemaker/xgboost-students-grades' # Used as part of the path in the bucket where you store data
+bucket_path = 'https://s3-{}.amazonaws.com/{}'.format(region, bucket) # The URL to access the bucket
 
 for data_partition_name in data_partition_names:
     faker = Faker()
@@ -337,17 +342,13 @@ for data_partition_name in data_partition_names:
 
     np.random.shuffle(examples)
 
-    # print(examples)
+    print(examples)
 
     np.savetxt('data.csv', examples, delimiter=',')
 
-    region='us-east-1'
 
-    bucket='mitesh-sagemaker-11142019' # Replace with your s3 bucket name
-    prefix = 'sagemaker/xgboost-students-grades' # Used as part of the path in the bucket where you store data
-    bucket_path = 'https://s3-{}.amazonaws.com/{}'.format(region, bucket) # The URL to access the bucket
 
     key = "{}/{}/examples".format(prefix, data_partition_name)
     url = 's3://{}/{}'.format(bucket, key)
-    boto3.Session().resource('s3').Bucket(bucket).Object(key).upload_file('data.csv')
+    # boto3.Session().resource('s3').Bucket(bucket).Object(key).upload_file('data.csv')
     print('Done writing to {}'.format(url))
